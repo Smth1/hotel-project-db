@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Hotel Project</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/header-style.css" th:href="@{/css/header-style.css}" />
+</head>
+<body>
+    <div th:insert="header.html :: header"></div>
+    <a th:href="@{client-profile}" >client profile</a>
+</body>
+</html>

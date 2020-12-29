@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client Profile</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header-style.css}" />
+</head>
+<body>
+    <div th:insert="header.html :: header"></div>
+    <table>
+        <thead>
+        <tr>
+            <th> Title </th>
+            <th> Author </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${rooms.isEmpty()}">
+            <td colspan="2"> No rooms Available </td>
+        </tr>
+        <tr th:each="room : ${rooms}">
+            <td><span th:text="${room.id}"> Title </span></td>
+            <td><span th:text="${room.number}"> Author </span></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/rooms/all}">All rooms</a>
+</body>
+</html>

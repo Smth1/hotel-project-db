@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Log In</title>
+    <link rel="stylesheet" th:href="@{/css/login-style.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="session">
+    <div class="left">
+
+    </div>
+    <form action="" class="log-in" th:action="@{/login}" th:object="${client}" method="post">
+        <h4>We are <span>Hotel Project</span></h4>
+        <p>Welcome back! Log in to your account to view today's clients:</p>
+        <div class="floating-label">
+            <div class="icon">
+                <img th:src="@{img/user-icon.png}" alt="E-mail:"/>
+            </div>
+            <input placeholder="Login" type="text" name="username" id="username" autocomplete="off">
+        </div>
+        <div class="floating-label">
+            <div class="icon">
+                <img th:src="@{img/password-icon.png}"  alt="Password:"/>
+            </div>
+            <input placeholder="Password" type="password" name="password" id="password" autocomplete="off">
+            <label for="password">Password:</label>
+        </div>
+        <div class="submit" >
+            <a class="signup" href="/" th:href="@{/registration}">Sign up</a>
+            <button class="login" type="submit">Log in</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
