@@ -13,6 +13,7 @@ public class RegisterInfo {
     private String description;
     private LocalDateTime creationDate;
     private LocalDateTime closingDate;
+    private Boolean isConfirmed;
 
     @OneToOne(targetEntity = HotelClient.class, cascade = CascadeType.ALL)
     private HotelClient admin;

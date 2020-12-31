@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RoomService {
@@ -34,6 +35,10 @@ public class RoomService {
         return byId.orElse(null);
     }
 
+    public void saveRoom(Room room) {
+        this.roomRepository.save(room);
+    }
+
     public Page<Room> findPaginated(Pageable pageable) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
@@ -48,9 +53,37 @@ public class RoomService {
             list = rooms.subList(startItem, toIndex);
         }
 
-        Page<Room> bookPage
-                = new PageImpl<Room>(list, PageRequest.of(currentPage, pageSize), rooms.size());
+        Page<Room> roomPage
+                = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), rooms.size());
 
-        return bookPage;
+        return roomPage;
+    }
+
+    public List<Room> unCleanRooms() {
+        List<Room> rooms = this.roomRepository.findAll().stream()
+                .filter(el -> !el.getClean())
+                .collect(Collectors.toList());
+
+        return rooms;
+    }
+
+    public Page<Room> findPaginatedUnclean(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Room> list;
+        List<Room> rooms = this.unCleanRooms();
+
+        if (rooms.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, rooms.size());
+            list = rooms.subList(startItem, toIndex);
+        }
+
+        Page<Room> roomPage
+                = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), rooms.size());
+
+        return roomPage;
     }
 }

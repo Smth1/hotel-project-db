@@ -3,44 +3,52 @@
 <head>
     <title>Registration</title>
     <link rel="stylesheet" th:href="@{/css/login-style.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin></script>
 </head>
-<body>
-<div class="session">
-    <div class="left">
+    <body>
+        <div class="session">
+            <div class="left">
 
-    </div>
-    <form action="" class="log-in" th:action="@{/registration}" th:object="${client}" method="post">
-        <h4>We are <span>Hotel Project</span></h4>
-        <p>Enter your credentials for registration</p>
-        <div class="floating-label">
-            <div class="icon">
-                <img th:src="@{img/user-icon.png}" />
             </div>
-            <input placeholder="First Name" type="text" name="firstName" id="firstName" autocomplete="off">
+            <form action="" class="log-in" th:action="@{/registration}" th:object="${client}" method="post">
+                <h4>We are <span>Hotel Project</span></h4>
+                <p>Enter your credentials for registration</p>
+                <div th:if="${message != null}" class="alert alert-danger"
+                     th:text="${message != null} ? ${message}"
+                     role="alert">
+                </div>
+                <div class="floating-label">
+                    <div class="icon">
+                        <img th:src="@{img/user-icon.png}" />
+                    </div>
+                    <input placeholder="First Name" type="text" name="firstName" id="firstName" autocomplete="off">
+                </div>
+                <div class="floating-label">
+                    <div class="icon">
+                        <img th:src="@{img/user-icon.png}" />
+                    </div>
+                    <input placeholder="Last Name" type="text" name="lastName" id="lastName" autocomplete="off">
+                </div>
+                <div class="floating-label">
+                    <div class="icon">
+                        <img th:src="@{img/user-icon.png}" />
+                    </div>
+                    <input placeholder="Login" type="text" name="login" id="login" autocomplete="off">
+                </div>
+                <div class="floating-label">
+                    <div class="icon">
+                        <img th:src="@{img/password-icon.png}" />
+                    </div>
+                    <input placeholder="Password" type="password" name="password" id="password" autocomplete="off">
+                    <label for="password">Password:</label>
+                </div>
+                <div class="submit" >
+                    <button class="login" type="submit">Register</button>
+                </div>
+            </form>
         </div>
-        <div class="floating-label">
-            <div class="icon">
-                <img th:src="@{img/user-icon.png}" />
-            </div>
-            <input placeholder="Last Name" type="text" name="lastName" id="lastName" autocomplete="off">
-        </div>
-        <div class="floating-label">
-            <div class="icon">
-                <img th:src="@{img/user-icon.png}" />
-            </div>
-            <input placeholder="Login" type="text" name="login" id="login" autocomplete="off">
-        </div>
-        <div class="floating-label">
-            <div class="icon">
-                <img th:src="@{img/password-icon.png}" />
-            </div>
-            <input placeholder="Password" type="password" name="password" id="password" autocomplete="off">
-            <label for="password">Password:</label>
-        </div>
-        <div class="submit" >
-            <button class="login" type="submit">Register</button>
-        </div>
-    </form>
-</div>
-</body>
+    </body>
 </html>

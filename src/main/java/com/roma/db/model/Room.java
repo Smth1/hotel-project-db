@@ -11,9 +11,12 @@ public class Room {
     private Integer id;
     private Integer floatNumber;
     private Integer number;
+    private Boolean isClean;
 
     @ManyToMany(mappedBy = "rooms")
     List<CleaningReport> reports;
+
+
 
     public Integer getId() {
         return id;
@@ -45,5 +48,13 @@ public class Room {
 
     public void setReports(List<CleaningReport> reports) {
         this.reports = reports;
+    }
+
+    public Boolean getClean() {
+        return isClean;
+    }
+
+    public void setClean(Boolean clean) {
+        isClean = clean;
     }
 }

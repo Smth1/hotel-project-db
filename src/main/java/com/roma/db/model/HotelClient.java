@@ -28,7 +28,14 @@ public class HotelClient implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(Role.USER.name());
+        final SimpleGrantedAuthority simpleGrantedAuthority;
+        if (roles.contains(Role.ADMIN))
+            simpleGrantedAuthority= new SimpleGrantedAuthority(Role.ADMIN.name());
+        else if (roles.contains(Role.MAID))
+            simpleGrantedAuthority= new SimpleGrantedAuthority(Role.MAID.name());
+        else
+            simpleGrantedAuthority = new SimpleGrantedAuthority(Role.USER.name());
+
         return Collections.singletonList(simpleGrantedAuthority);
     }
 

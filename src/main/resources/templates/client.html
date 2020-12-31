@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Client</title>
+</head>
+    <body>
+        <header th:replace="~{header :: header}"></header>
+
+        <div class="container justify-content-center">
+            <hr>
+            <h2>Update client</h2>
+            <form class="form-group"  action="#" th:object="${hotelClient}" method="post">
+                <label style="margin-top: 25px" for="input1">First name</label>
+                <input class="form-control" id="input1" type="text" th:field="*{firstName}" th:value="*{firstName}">
+
+                <label style="margin-top: 25px" for="input2">Last name</label>
+                <input class="form-control" id="input2" type="text" th:field="*{lastName}" th:value="*{lastName}">
+
+                <label style="margin-top: 25px" for="input3">login</label>
+                <input class="form-control" id="input3" type="text" th:field="*{login}" th:value="*{login}">
+
+                <label class="mr-sm-2"
+                       sec:authorize="hasAuthority('ADMIN')"
+                       for="inlineFormCustomSelect" style="margin-top: 25px">Select role</label>
+                <select th:field="*{role}"
+                        sec:authorize="hasAuthority('ADMIN')"
+                        class="custom-select mr-sm-2"
+                        id="inlineFormCustomSelect" >
+                    <option th:selected="${role==1}" value="USER" >USER</option>
+                    <option th:selected="${role==2}" value="MAID">MAID</option>
+                    <option th:selected="${role==3}" value="ADMIN">ADMIN</option>
+                </select>
+
+                <button style="margin-top: 25px" type="submit" class="btn btn-info col-2"> Update client</button>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin></script>
+</head>
+<body>
+<div th:insert="header.html :: header"></div>
+
+<div class="container justify-content-center">
+    <hr>
+    <h2>Add new room</h2>
+
+    <form class="form-group"  action="#" th:action="@{/add-room}" th:object="${room}"
+          method="post">
+        <label style="margin-top: 25px" for="input1">Room number</label>
+        <input class="form-control" id="input1" type="text" th:field="*{number}" placeholder="number">
+
+        <label style="margin-top: 25px" for="input2">Float</label>
+        <input class="form-control" id="input2" type="text" th:field="*{floatNumber}" placeholder="float number">
+
+        <button style="margin-top: 25px" type="submit" class="btn btn-info col-2"> Add room</button>
+    </form>
+
+    <hr>
+
+    <a th:href = "@{/rooms/all}"> Back to room list</a>
+</div>
+</body>
+</html>

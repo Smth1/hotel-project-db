@@ -5,20 +5,34 @@
     <link th:href="@{/static/css/header-style.css}" rel="stylesheet">
 </head>
 <body>
-    <div th:fragment="header" class="header">
-        <div>
-            <a href="#default" class="logo"><img th:src="@{img/logo.png}" alt="Company Logo"></a>
-            <div class="header-right">
-                <a class="active" href="#home">Home</a>
-                <a href="#contact">Contact</a>
-                <a href="#about">About</a>
+    <nav th:fragment="header" class="navbar navbar-light" style="background-color: #e3f2fd;">
+            <a href="#" class="logo"><img th:src="@{/img/logo1.png}" alt="Company Logo"></a>
+            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" sec:authorize="hasAuthority('ADMIN')" href="/clients/all">All clients</a>
+            <a class="navbar-brand" sec:authorize="hasAuthority('ADMIN')" href="/add-room">Add room</a>
+            <a class="navbar-brand" sec:authorize="hasAuthority('ADMIN')" href="/admin/tasks">Admin tasks</a>
+            <a class="navbar-brand" sec:authorize="hasAuthority('MAID')" href="/maid/tasks">Maid tasks</a>
+            <a class="navbar-brand" sec:authorize="isAuthenticated()" href="/rooms/all">Rooms</a>
+            <a class="navbar-brand" sec:authorize="isAuthenticated()" href="/editProfile">Edit profile</a>
+            <a sec:authorize="isAnonymous()" class="btn btn-outline-warning my-2 my-sm-0" href="/login">Login</a>
 
-                <a sec:authorize="isAnonymous()" class="active" href="/login">Login</a>
-                <a sec:authorize="isAuthenticated()" class="active" href="/logout">Logout</a>
-                <div sec:authorize="isAuthenticated()">Wellcome, <span sec:authentication="name"></span></div>
-
+            <div sec:authorize="isAuthenticated()">
+                <form  action="/logout" method="post" class="form-inline mt-2 mt-md-0 float-right" >
+                    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Log out</button>
+                </form>
+                <span sec:authentication="name" style="float: right; color:black; margin-left: 1.25em; margin-right: 1.25em; display: block; font-size: 120%">Username</span>
             </div>
-        </div>
-    </div>
+<!--            <a href="#default" class="logo"><img th:src="@{img/logo.png}" alt="Company Logo"></a>-->
+<!--            <div class="header-right">-->
+<!--                <a class="active" href="#home">Home</a>-->
+<!--                <a href="#contact">Contact</a>-->
+<!--                <a href="#about">About</a>-->
+
+<!--                <a sec:authorize="isAnonymous()" class="active" href="/login">Login</a>-->
+<!--                <a sec:authorize="isAuthenticated()" class="active" href="/logout">Logout</a>-->
+<!--                <div sec:authorize="isAuthenticated()">Wellcome, <span sec:authentication="name"></span></div>-->
+
+<!--            </div>-->
+    </nav>
 </body>
 </html>

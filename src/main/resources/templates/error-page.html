@@ -2,14 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <title>Hotel Project</title>
+    <title>Error</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <!--script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/css/header-style.css" th:href="@{/css/header-style.css}" />
 </head>
 <body>
-    <header th:replace="~{header :: header}"></header>
-    <a th:href="@{client-profile}" >client profile</a>
+<header th:replace="~{header :: header}"></header>
+<div class="container">
+    <h1>Something went wrong</h1>
+
+
+        <a class="btn btn-info" th:href="@{/}" >Go Home</a>
+    </div>
 </body>
 </html>
