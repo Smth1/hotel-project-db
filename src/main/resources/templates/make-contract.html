@@ -16,7 +16,7 @@
 <body>
     <header th:replace="~{header :: header}"></header>
         <div class="container my-2 mx-auto" style="width: 400px">
-            <form method="post">
+            <form sec:authorize="hasAuthority('USER')" method="post">
                 <div class="form-group">
                     <div class="mb-2">Select closing date:</div>
                     <input type="date" name="closingDate" class="form-control">
@@ -29,6 +29,8 @@
 
                 <button class="btn btn-primary mt-4" type="submit">Order room</button>
             </form>
+
+            <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-info" th:href="'/admin/confirmRoom/' + ${roomId}">Confirm</a>
         </div>
 </body>
 </html>

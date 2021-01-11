@@ -2,7 +2,6 @@ package com.roma.db.controller;
 
 import com.roma.db.model.HotelClient;
 import com.roma.db.model.Role;
-import com.roma.db.model.Room;
 import com.roma.db.model.dto.ClientLoginDto;
 import com.roma.db.model.dto.HotelClientDto;
 import com.roma.db.service.ClientService;
@@ -17,10 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -38,15 +34,6 @@ public class ClientController {
     @GetMapping("/login")
     public String loginPage() {
         return "login";
-    }
-
-    @GetMapping("/client-profile")
-    public String getClientPage(Model model) {
-        List<Room> rooms = roomService.getAllRooms();
-
-        model.addAttribute("rooms", rooms);
-
-        return "client-profile";
     }
 
     @GetMapping("/clients/all")
@@ -77,7 +64,7 @@ public class ClientController {
         if (authorities.contains(new SimpleGrantedAuthority("ADMIN")))
             return "clients";
         else
-            return "redirect:/";
+            return "redirect:/error";
     }
 
     @GetMapping("/clients/{id}")
@@ -94,17 +81,9 @@ public class ClientController {
 
     @PostMapping("/clients/{id}")
     public String editClient(@PathVariable String id, HotelClientDto hotelClient, Model model) {
-        HotelClient hotelClient1= this.clientService.getClientById(Integer.parseInt(id));
+        clientService.saveClient(id, hotelClient);
 
-        hotelClient = new HotelClientDto(hotelClient1.getFirstName(),
-                hotelClient1.getLastName(),
-                hotelClient1.getLogin(),
-                Role.USER);
-
-        model.addAttribute("hotelClient", hotelClient);
-
-
-        return "client";
+        return "redirect:/";
     }
 
     @GetMapping("/clients/delete/{id}")

@@ -5,7 +5,7 @@ import com.roma.db.model.HotelClient;
 import com.roma.db.model.Room;
 import com.roma.db.service.CleaningReportService;
 import com.roma.db.service.ClientService;
-import com.roma.db.service.RoomService;
+import com.roma.db.service.MaidService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,9 +27,11 @@ import java.util.stream.IntStream;
 @Controller
 public class MaidController {
     @Autowired
-    private RoomService roomService;
+    private MaidService maidService;
+
     @Autowired
     private ClientService clientService;
+
     @Autowired
     private CleaningReportService cleaningReportService;
 
@@ -44,7 +45,7 @@ public class MaidController {
         int nextPage = 0;
         int previousPage = 0;
 
-        Page<Room> roomPage = roomService.findPaginatedUnclean(PageRequest.of(currentPage - 1, pageSize));
+        Page<Room> roomPage = maidService.findPaginatedUnclean(PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("roomPage", roomPage);
 
@@ -66,26 +67,11 @@ public class MaidController {
         else {
             return "redirect:/error";
         }
-
     }
 
     @GetMapping("/cleanRoom/{roomId}")
     public String cleanRoom(@PathVariable String roomId) {
-        String username = clientService.currentUser().getUsername();
-        HotelClient clientByLogin = clientService.getClientByLogin(username);
-        Room room = roomService.getRoomById(roomId);
-        room.setClean(true);
-        roomService.saveRoom(room);
-
-        CleaningReport cleaningReport = new CleaningReport();
-
-        cleaningReport.setMaid(clientByLogin);
-        cleaningReport.setClosed(false);
-        cleaningReport.setCreationDate(LocalDateTime.now());
-        cleaningReport.setDescription("some description");
-        cleaningReport.setRooms(Collections.singletonList(room));
-
-        cleaningReportService.makeCleaningReport(cleaningReport);
+        maidService.cleanRoom(roomId);
 
         if (clientService.currentUser()
                 .getAuthorities()

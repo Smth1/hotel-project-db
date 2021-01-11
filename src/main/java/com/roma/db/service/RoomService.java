@@ -59,31 +59,9 @@ public class RoomService {
         return roomPage;
     }
 
-    public List<Room> unCleanRooms() {
-        List<Room> rooms = this.roomRepository.findAll().stream()
-                .filter(el -> !el.getClean())
-                .collect(Collectors.toList());
+    public void deleteRoom(String roomId) {
+        Optional<Room> byId = roomRepository.findById(Integer.parseInt(roomId));
 
-        return rooms;
-    }
-
-    public Page<Room> findPaginatedUnclean(Pageable pageable) {
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-        List<Room> list;
-        List<Room> rooms = this.unCleanRooms();
-
-        if (rooms.size() < startItem) {
-            list = Collections.emptyList();
-        } else {
-            int toIndex = Math.min(startItem + pageSize, rooms.size());
-            list = rooms.subList(startItem, toIndex);
-        }
-
-        Page<Room> roomPage
-                = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), rooms.size());
-
-        return roomPage;
+        byId.ifPresent(roomRepository::delete);
     }
 }

@@ -1,7 +1,9 @@
 package com.roma.db.service;
 
 import com.roma.db.model.HotelClient;
+import com.roma.db.model.Role;
 import com.roma.db.model.Room;
+import com.roma.db.model.dto.HotelClientDto;
 import com.roma.db.repository.HotelClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +41,23 @@ public class ClientService implements UserDetailsService {
         Optional<HotelClient> client = hotelClientRepository.findByLogin(login);
 
         return client.orElse(null);
+    }
+
+    public void saveClient(String id, HotelClientDto hotelClient) {
+        HotelClient hotelClient1= getClientById(Integer.parseInt(id));
+
+
+        hotelClient1.setFirstName(hotelClient.getFirstName());
+        hotelClient1.setLastName(hotelClient.getLastName());
+        hotelClient1.setLogin(hotelClient.getLogin());
+        if (hotelClient.getRole() != null)
+            hotelClient1.setRoles(new HashSet<>(Collections.singletonList(hotelClient.getRole())));
+
+        hotelClientRepository.save(hotelClient1);
+    }
+
+    public void saveClient(HotelClient client) {
+        this.hotelClientRepository.save(client);
     }
 
     @Override

@@ -52,7 +52,7 @@
                 </li>
 
                 <li th:each="pageNumber : ${pageNumbers}" class="page-item">
-                    <a class="page-link" th:href="@{/rooms/all(size=${roomPage.size}, page=${pageNumber})}"
+                    <a class="page-link" th:href="@{/maid/tasks(size=${roomPage.size}, page=${pageNumber})}"
                        th:text="${pageNumber}"></a>
                 </li>
 

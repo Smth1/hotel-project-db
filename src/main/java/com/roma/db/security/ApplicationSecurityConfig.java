@@ -42,25 +42,4 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logout()
                     .permitAll();
     }
-
-//    @Override
-//    @Bean
-//    protected UserDetailsService userDetailsService() {
-//        UserDetails anna = User.builder()
-//                .username("annastith")
-//                .password(passwordEncoder.encode("password"))
-//                .roles("STUDENT")
-//                .build();
-//
-//        UserDetails linda = User.builder()
-//                .username("linda")
-//                .password("pa1")
-//                .roles("ADMIN")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(
-//                anna,
-//                linda
-//        );
-//    }
 }

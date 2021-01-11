@@ -20,8 +20,8 @@
             <hr>
             <h2>Update client</h2>
             <form class="form-group"  action="#" th:object="${hotelClient}" method="post">
-                <label style="margin-top: 25px" for="input1">First name</label>
-                <input class="form-control" id="input1" type="text" th:field="*{firstName}" th:value="*{firstName}">
+                <label style="margin-top: 25px" for="firstName">First name</label>
+                <input class="form-control" id="firstName" type="text" name="firstName" th:field="*{firstName}" th:value="*{firstName}">
 
                 <label style="margin-top: 25px" for="input2">Last name</label>
                 <input class="form-control" id="input2" type="text" th:field="*{lastName}" th:value="*{lastName}">

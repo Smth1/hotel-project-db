@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 public class CleaningReport {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String description;
     private LocalDateTime creationDate;
@@ -15,10 +16,6 @@ public class CleaningReport {
     @ManyToOne(optional = false)
     @JoinColumn(name="maid_id")
     private HotelClient maid;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name="admin_id")
-    private HotelClient admin;
 
     @ManyToMany
     @JoinTable(name = "cleaning_report_has_room",
@@ -65,14 +62,6 @@ public class CleaningReport {
 
     public void setMaid(HotelClient maid) {
         this.maid = maid;
-    }
-
-    public HotelClient getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(HotelClient admin) {
-        this.admin = admin;
     }
 
     public List<Room> getRooms() {

@@ -17,6 +17,7 @@ import java.util.List;
 public class RegisterInfoController {
     @Autowired
     private ClientService clientService;
+
     @Autowired
     private RegisterInfoService registerInfoService;
 
@@ -35,6 +36,7 @@ public class RegisterInfoController {
                                Model model) {
         HotelClient client = clientService.getClientByLogin(clientService.currentUser().getUsername());
         registerInfoService.initRegister(client, roomId, closingDate, description);
+
         return "redirect:/rooms/all";
     }
 }
